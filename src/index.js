@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'typeface-roboto';
+import NavBar from './components/NavBar';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
+    <NavBar/>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
