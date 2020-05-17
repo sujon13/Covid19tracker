@@ -1,6 +1,12 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import {
     Paper,
     Table,
     TableHead,
@@ -121,8 +127,10 @@ function stableSort(array, comparator) {
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 100,
-        marginLeft: theme.spacing(5),
-        marginRight: theme.spacing(5),
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(5),
+            marginRight: theme.spacing(5),
+        },
     },
     container: {
         maxHeight: 800
@@ -132,10 +140,12 @@ const useStyles = makeStyles((theme) => ({
 export default function MainTable(props) {
     const classes = useStyles();
     const [dataList, setDataList] = useState(props.dataList);
+    const [paginationActive, setPaginationActive] = useState(props.paginationActive);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
     const [order, setOrder] = React.useState('desc');
     const [orderBy, setOrderBy] = React.useState('new cases');
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -219,7 +229,13 @@ export default function MainTable(props) {
                                                     </TableCell>
                                                 ) : (
                                                     <TableCell key={column.id} align={column.align}>
-                                                        {value}
+                                                        <Link to={{
+                                                            pathname: '/country/',
+                                                            state: {
+                                                                data: data
+                                                            }
+                                                        }}>{value}</Link>
+                                                    
                                                     </TableCell>
 
                                                 )}
@@ -233,15 +249,21 @@ export default function MainTable(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[15, 25, 100]}
-                component="div"
-                count={dataList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+            <React.Fragment>
+                { paginationActive === 'true'? (
+                    <TablePagination
+                        rowsPerPageOptions={[15, 25, 100]}
+                        component="div"
+                        count={dataList.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
+                ) : (
+                    ''
+                )}
+            </React.Fragment>
         </Paper>
     );
 }
@@ -254,7 +276,7 @@ const DefaultRow = (props) => {
         <TableRow key='world'>
             <React.Fragment>
                 { typeof data === 'undefined'? (
-                    <div>data is loading</div>
+                    <div></div>
                 ) : (
                     <React.Fragment>
                         {columns.map((column) => {

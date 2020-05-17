@@ -26,17 +26,14 @@ const useStyles = makeStyles((theme) => ({
         //color: 'white',
         //height: 100,
         [theme.breakpoints.down('xs')]: {
-            marginLeft: theme.spacing(2),
-            marginRight: theme.spacing(2),
+            marginLeft: theme.spacing(1),
+            marginRight: theme.spacing(1),
         },
         [theme.breakpoints.up('xs')]: {
             marginLeft: theme.spacing(5),
             marginRight: theme.spacing(5),
         },
         
-    },
-    table: {
-        marginLeft: theme.spacing(5),
     }
 }))
 
@@ -49,7 +46,7 @@ export default function HeadPaper(props) {
                     Covid-19 Update
                 </Typography>
             </ThemeProvider>
-            <Table className={classes.table} data={props.data}/>
+            <Table data={props.data}/>
         </Paper>
 
     );

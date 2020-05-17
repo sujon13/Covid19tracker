@@ -1,6 +1,12 @@
  import React, { Component, useState, useEffect } from 'react';
  import{ makeStyles } from '@material-ui/core/styles';
  import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+ import {
      Paper,
      Grid
  } from '@material-ui/core';
@@ -26,6 +32,7 @@
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+    //const [url, setUrl] = useStyles(props.url)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +42,7 @@
             try {
                 let url = "https://a1caa880.ngrok.io/api/v1/corona_stats/";
                 let URL = "http://127.0.0.1:8000/api/v1/corona_stats/"
-                const result = await axios(url);
+                const result = await axios(URL);
                 setData(result.data);
             } catch (error) {
                 console.log(error);
@@ -64,15 +71,14 @@
                 <div>Loading ...</div>
             ) : (
                 <Grid container spacing={3}>
-                    <Grid container item xs={12} sm={3}spacing={3} direction="row">
+                    <Grid container item sm={12} md={3}spacing={3} direction="row">
                         <FormRow/>
                     </Grid>
-                    <Grid item xs={12} sm={9}>
+                    <Grid item sm={12} md={9}>
                         <HeadPaper data={data}/>
                     </Grid>
-                    
                     <Grid item xs={12}>
-                        <MainTable dataList={data}/>
+                        <MainTable dataList={data} paginationActive="true"/>
                     </Grid>
                 </Grid>
             )}
