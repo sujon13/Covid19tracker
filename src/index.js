@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
 import NavBar from './components/NavBar';
 import CountryDetail from './components/CountryDetail';
+import { StateProvider } from './store.js';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,21 +15,20 @@ import {
     Link
 } from "react-router-dom";
 
-function Home() {
-    return <div> hi</div>
-}
+
 ReactDOM.render(
-    <React.Fragment>
-        <Router>
-            <NavBar/>
-            {/*<App url="http://127.0.0.1:8000/api/v1/corona_stats/"/>*/}
-            <Switch>
-                <Route path="/" component={App} exact />
-                <Route path="/home/" component={Home} />
-                <Route path="/country/" component={CountryDetail}/>
-            </Switch>
-        </Router>
-  </React.Fragment>,
+        <StateProvider>
+            <React.Fragment>
+                <Router>
+                    <NavBar/>
+                    {/*<App url="http://127.0.0.1:8000/api/v1/corona_stats/"/>*/}
+                    <Switch>
+                        <Route path="/" component={App} exact/>
+                        <Route path="/country/:cName/" component={CountryDetail}/>
+                    </Switch>
+                </Router>
+            </React.Fragment>
+        </StateProvider>,
   document.getElementById('root')
 );
 

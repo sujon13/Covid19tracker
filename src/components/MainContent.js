@@ -228,16 +228,22 @@ export default function MainTable(props) {
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}
                                                     </TableCell>
                                                 ) : (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        <Link to={{
-                                                            pathname: '/country/',
-                                                            state: {
-                                                                data: data
-                                                            }
-                                                        }}>{value}</Link>
-                                                    
-                                                    </TableCell>
-
+                                                    <React.Fragment>
+                                                        {column.id === 'country'? (
+                                                            <TableCell key={column.id} align={column.align}>
+                                                                <Link to={{
+                                                                    pathname: `/country/${value}/`,
+                                                                    state: {
+                                                                        data: data
+                                                                    }
+                                                                }}>{value}</Link>
+                                                            </TableCell>
+                                                        ) : (
+                                                            <TableCell key={column.id} align={column.align}>
+                                                                {value}
+                                                            </TableCell>
+                                                        )}
+                                                    </React.Fragment>
                                                 )}
                                             </React.Fragment>
                                         );
