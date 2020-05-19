@@ -16,7 +16,9 @@ import {
     TableRow,
     TablePagination,
     TableSortLabel,
-    IconButton
+    IconButton,
+    Button,
+    Grid
 } from '@material-ui/core';
 
 import { isCompositeComponentWithType } from "react-dom/test-utils";
@@ -126,14 +128,14 @@ function stableSort(array, comparator) {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: 100,
+        marginTop: 10,
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(5),
             marginRight: theme.spacing(5),
         },
     },
     container: {
-        maxHeight: 800
+        maxHeight: 800,
     }
 }))
 
@@ -191,6 +193,7 @@ export default function MainTable(props) {
                                 key={column.id}
                                 align="center"
                                 sortDirection={orderBy === column.id ? order : false}
+                                style={{fontWeight:"bold"}}
                             >
                                 <TableSortLabel
                                     active={orderBy === column.id}
@@ -223,14 +226,18 @@ export default function MainTable(props) {
                                                     <TableCell
                                                         key={column.id}
                                                         align={column.align}
-                                                        style={{backgroundColor: column.bgColor, color: column.color}}
+                                                        style={{backgroundColor: column.bgColor, color: column.color, fontWeight: "bold"}}
                                                     >
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}
                                                     </TableCell>
                                                 ) : (
                                                     <React.Fragment>
                                                         {column.id === 'country'? (
-                                                            <TableCell key={column.id} align={column.align}>
+                                                            <TableCell
+                                                                key={column.id}
+                                                                align={column.align}
+                                                                style={{fontWeight: "bold"}}
+                                                            >
                                                                 <Link to={{
                                                                     pathname: `/country/${value}/`,
                                                                     state: {
@@ -292,7 +299,7 @@ const DefaultRow = (props) => {
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{backgroundColor: "#d8e0ed"}}
+                                    style={{backgroundColor: "#d8e0ed", fontWeight: "bold"}}
                                 >
                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                 </TableCell>

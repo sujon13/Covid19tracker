@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
     },
 }))
 
@@ -101,45 +103,48 @@ function CustomPaper(props) {
     }
 
     return(
-        <Paper className={classes.paper} variant="outlined">
-            <ThemeProvider theme={theme}>
-                <Typography variant="h6" gutterBottom>
-                    {props.cases}
-                </Typography>
-            </ThemeProvider>
-            <Divider/>
-            <React.Fragment>
-                {willRender()? (
-                    <Grid container direction="row" spacing={2}>
-                        <Grid item xs={12}>
+        <React.Fragment>
+            <Paper className={classes.paper} style={{backgroundColor:'#9ab8e6'}}>
+                <ThemeProvider theme={theme}>
+                    <Typography variant="h6" gutterBottom>
+                        {props.cases}
+                    </Typography>
+                </ThemeProvider>
+            </Paper>
+            <Paper className={classes.paper} style={{backgroundColor: '#e9ebf0'}}>
+                <React.Fragment>
+                    {willRender()? (
+                        <Grid container direction="row" spacing={2}>
+                            <Grid item xs={12}>
+                                <React.Fragment>
+                                {
+                                    props.cases === 'ACTIVE CASES'? (
+                                        <React.Fragment>
+                                            {textFormat(data['active cases'])}
+                                            {textFormat(props.upperTitle)}
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            {textFormat(data['total deaths'] + data['total recovered'])}
+                                            {textFormat(props.upperTitle)}
+                                        </React.Fragment>   
+                                    )
+                                    
+                                }
+                                </React.Fragment>
+                            </Grid>
+                            <Grid container item xs={12}>
+                                {showLowerPart(data, props)}
+                            </Grid>
+                        </Grid>
+                        ) : (
                             <React.Fragment>
-                            {
-                                props.cases === 'ACTIVE CASES'? (
-                                    <React.Fragment>
-                                        {textFormat(data['active cases'])}
-                                        {textFormat(props.upperTitle)}
-                                    </React.Fragment>
-                                ) : (
-                                    <React.Fragment>
-                                        {textFormat(data['total deaths'] + data['total recovered'])}
-                                        {textFormat(props.upperTitle)}
-                                    </React.Fragment>   
-                                )
-                                
-                            }
+                                {textFormat('Data is not available')}
                             </React.Fragment>
-                        </Grid>
-                        <Grid container item xs={12}>
-                            {showLowerPart(data, props)}
-                        </Grid>
-                    </Grid>
-                    ) : (
-                        <React.Fragment>
-                             {textFormat('Data is not available')}
-                        </React.Fragment>
-                )}
-            </React.Fragment>
-        </Paper>
+                    )}
+                </React.Fragment>
+            </Paper>
+        </React.Fragment>
     );
 }
 

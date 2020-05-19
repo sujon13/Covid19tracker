@@ -8,7 +8,10 @@
 } from "react-router-dom";
  import {
      Paper,
-     Grid
+     Grid,
+     Button,
+     Typography,
+     Tooltip
  } from '@material-ui/core';
  import HeadPaper from './components/HeadNews';
  import MainTable from './components/MainContent';
@@ -26,30 +29,32 @@
          textAlign: 'center',
          color: theme.palette.text.secondary,
      },
+     button: {
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(5),
+        },
+     },
  }))
 
  export default function App(props) {
     const classes = useStyles();
-    //const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [demo, setDemo] = useState(0);
+    const [buttonName, setButtonName] = useState('today');
     const globalState = useContext(store);
     const [data, setData] = useState(globalState.state.data);
-    //const [url, setUrl] = useStyles(props.url)
     const { dispatch } = globalState;
 
-    const fetchData = async () => {
+    const fetchData = async (day) => {
         setIsError(false);
         setIsLoading(true);
         try {
             let url = "https://a1caa880.ngrok.io/api/v1/corona_stats/";
-            let URL = "http://127.0.0.1:8000/api/v1/corona_stats/"
+            let URL = `http://127.0.0.1:8000/api/v1/corona_stats/${day}/`
             const result = await axios(URL);
             
             setData(result.data);
-            //console.log(data);
-           // console.log(globalState);
         } catch (error) {
             console.log(error);
             setIsError(true);
@@ -60,16 +65,9 @@
         
     };
     useEffect(() => {
-        //console.log('call');
         if(globalState.state.data.length === 0) {
-            fetchData();
-        } else {
-            console.log('ache ki');
-            //(globalState.state.data);
-            //setDemo(1);
+            fetchData('today');
         }
-        //console.log(globalState.state.data);
-        //fetchData();
 
     }, []);
 
@@ -77,12 +75,8 @@
         if(data.length !== 0) {
             console.log(data);
             dispatch({ type: 'assign', item: data });
-        } else console.log('data zero');
+        }
     }, [data]);
-
-    useEffect(() => {
-        console.log(globalState);
-    },[globalState]);
     
     function FormRow() {
         return (
@@ -92,6 +86,10 @@
                 </Grid>
             </React.Fragment>
         );    
+    }
+    const handleButtonClick = (name) => {
+        setButtonName(name);
+        fetchData(name);
     }
 
     return (
@@ -107,8 +105,13 @@
                     <Grid item sm={12} md={9}>
                         <HeadPaper data={data}/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <MainTable dataList={data} paginationActive="true"/>
+                    <Grid container item xs={12} direction="row">
+                        <Grid item xs={6} >
+                            <SelectorButton onButtonClick={handleButtonClick} buttonName={buttonName}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <MainTable dataList={data} paginationActive="true"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             )}
@@ -116,3 +119,58 @@
     );
 
  }
+
+ const SelectorButton = (props) => {
+    const classes = useStyles();
+
+    const [colors, setColors] = useState({
+        today: 'primary',
+        yesterday: 'default'
+    });
+
+    const handleClick = (name) => {
+        console.log(name);
+        console.log(props.buttonName);
+        if(name !== props.buttonName) {
+            props.onButtonClick(name);
+        }
+    }
+    
+    useEffect(() => {
+        if(props.buttonName === 'yesterday') {
+            setColors({
+                today: 'default',
+                yesterday:'primary'
+            });
+        }
+    }, []);
+
+    return (
+        <Grid container spacing={1} className={classes.button}>
+            <Grid item>
+                <Tooltip title="click to see todays data">
+                    <Button
+                        variant="contained"
+                        color={colors.today}
+                        onClick={() => handleClick('today')}
+                        style={{textTransform: "none"}}
+                    >
+                    Today
+                    </Button>
+                </Tooltip>
+            </Grid>
+            <Grid item>
+                <Tooltip title="click to see yesterdays data">
+                    <Button 
+                        variant="contained"
+                        color={colors.yesterday}
+                        onClick={() => handleClick('yesterday')}
+                        style={{textTransform: "none"}}
+                    >
+                        Yesterday
+                    </Button>
+                </Tooltip>
+            </Grid>
+        </Grid>
+    );
+}
