@@ -1,11 +1,17 @@
 import React, { Component,useState, useEffect } from 'react';
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import {
     Paper,
     Typography,
-    Grid
+    Grid,
+    Tooltip
  } from '@material-ui/core';
 
 let theme = createMuiTheme();
@@ -94,12 +100,20 @@ function Table(props) {
                             <Paper variant="outlined">
                                 <Grid container spacing={1}>
                                     <Grid item xs={12}>
-                                        <ThemeProvider theme={theme}>
-                                            <Typography variant="h6" gutterBottom>
-                                                {capitalize(data.country)}
-                                            </Typography>
-                                        </ThemeProvider>
-                                        
+                                        <Tooltip title="see details" placement="top">
+                                            <Link to={{
+                                                pathname: `/country/${data.country}/`,
+                                                state: {
+                                                    data: data
+                                                }
+                                            }}>
+                                                <ThemeProvider theme={theme}>
+                                                    <Typography variant="h6" gutterBottom>
+                                                        {capitalize(data.country)}
+                                                    </Typography>
+                                                </ThemeProvider>
+                                            </Link>
+                                        </Tooltip>
                                     </Grid>
                                     {printCase(data, "total cases")}
                                     {printCase(data, "total deaths")}

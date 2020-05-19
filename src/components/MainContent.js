@@ -18,7 +18,8 @@ import {
     TableSortLabel,
     IconButton,
     Button,
-    Grid
+    Grid,
+    Tooltip
 } from '@material-ui/core';
 
 import { isCompositeComponentWithType } from "react-dom/test-utils";
@@ -238,12 +239,14 @@ export default function MainTable(props) {
                                                                 align={column.align}
                                                                 style={{fontWeight: "bold"}}
                                                             >
-                                                                <Link to={{
-                                                                    pathname: `/country/${value}/`,
-                                                                    state: {
-                                                                        data: data
-                                                                    }
-                                                                }}>{value}</Link>
+                                                                <Tooltip title="see details">
+                                                                    <Link to={{
+                                                                        pathname: `/country/${value}/`,
+                                                                        state: {
+                                                                            data: data
+                                                                        }
+                                                                    }}>{value}</Link>
+                                                                </Tooltip>
                                                             </TableCell>
                                                         ) : (
                                                             <TableCell key={column.id} align={column.align}>
