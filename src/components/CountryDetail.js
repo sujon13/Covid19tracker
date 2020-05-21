@@ -5,7 +5,8 @@ import {
     Paper,
     Grid,
     Typography,
-    Divider
+    Divider,
+    Container
 } from '@material-ui/core';
 import {
     BrowserRouter as Router,
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
     },
+    span:{
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(2),
+    }
 }))
 
 export default function CountryDetail(props) {
@@ -74,8 +79,20 @@ export default function CountryDetail(props) {
                     />
                </Grid>
            </Grid>
+           <Grid container className={classes.span}>
+               <Grid item xs={12} style={{textAlign: "center"}}>
+                    <Typography variant="h6">
+                        {`Corona Status of ${data.country}`}
+                    </Typography>
+               </Grid>
+           </Grid>
 
-           <MainTable dataList = {[data]} paginationActive="false"/>
+           <MainTable 
+                dataList = {[data]} 
+                paginationActive="false" 
+                sortLabel="hide"
+                searchHidden="true"
+            />
        </div>
    );
 

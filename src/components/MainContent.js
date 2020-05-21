@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,10 +19,16 @@ import {
     IconButton,
     Button,
     Grid,
-    Tooltip
+    Tooltip,
+    Typography,
+    InputBase,
+    TextField,
+    Box,
 } from '@material-ui/core';
 
 import { isCompositeComponentWithType } from "react-dom/test-utils";
+import SearchIcon from '@material-ui/icons/Search';
+import { lightBlue } from "@material-ui/core/colors";
 
 const columns = [
     { 
@@ -63,6 +69,8 @@ const columns = [
         id: "total recovered",
         label: "Total recovered",
         align: "right",
+        bgColor: "#0d7303",
+        color: "white",
         format: (value) => value.toLocaleString('en-US'),
     },
     {
@@ -137,12 +145,56 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         maxHeight: 800,
-    }
+    },
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+            backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        
+        marginRight: 10,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+            width: 'auto',
+        },
+    },
+    searchIcon: {
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputRoot: {
+        color: 'inherit',
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: '12ch',
+            '&:focus': {
+                width: '20ch',
+            },
+        },
+    },
+    tableName: {
+        textAlign: 'center',
+    },
 }))
 
 export default function MainTable(props) {
     const classes = useStyles();
     const [dataList, setDataList] = useState(props.dataList);
+    const [filteredDataList, setFilteredDataList] = useState(props.dataList);
     const [paginationActive, setPaginationActive] = useState(props.paginationActive);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -171,9 +223,28 @@ export default function MainTable(props) {
         if(!str || str.length == 0)return false;
         else return true;
     }
+
+    const handleSearch = (value) => {
+        const tempFilteredDataList = filterDataListForValue(value);
+        console.log(value);
+        console.log(tempFilteredDataList);
+        setFilteredDataList(tempFilteredDataList);   
+    }
+    function filterDataListForValue(value) {
+        if(value === '')return dataList;
+        let newDataList = [];
+        for(const data of dataList) {
+            const entryStr = data.country.toString().toLowerCase();
+            if(entryStr.includes(value)) {
+                newDataList.push(data);
+            }
+        }
+        return newDataList;
+    }
+    // It will remove continent info and invalid info
     function filterDataList() {
         const tempData = [];
-        for(const data of dataList) {
+        for(const data of filteredDataList) {
             if(!continent.includes(data.country.toLowerCase()) && isNotEmpty(data.country))tempData.push(data);   
         }
         
@@ -185,6 +256,10 @@ export default function MainTable(props) {
 
     return (
         <Paper className={classes.root} elevation={3}>
+            <SearchBar
+                onSearchValueChanged = {handleSearch}
+                searchHidden = {props.searchHidden}
+            />
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -196,14 +271,20 @@ export default function MainTable(props) {
                                 sortDirection={orderBy === column.id ? order : false}
                                 style={{fontWeight:"bold"}}
                             >
-                                <TableSortLabel
-                                    active={orderBy === column.id}
-                                    direction={orderBy === column.id ? order : 'asc'}
-                                    onClick={createSortHandler(column.id)}
-                                    >
-                                    {column.label}
-                                    
-                                </TableSortLabel>
+                                <React.Fragment>
+                                    {props.sortLabel === 'hide'? (
+                                        `${column.label}`
+                                    ) : (
+                                        <TableSortLabel
+                                            active={orderBy === column.id}
+                                            direction={orderBy === column.id ? order : 'asc'}
+                                            onClick={createSortHandler(column.id)}
+                                            >
+                                            {column.label}
+                                            
+                                        </TableSortLabel>
+                                    )}
+                                </React.Fragment>
                             </TableCell>
                         ))}
                         </TableRow>
@@ -280,6 +361,14 @@ export default function MainTable(props) {
                     ''
                 )}
             </React.Fragment>
+            <Typography variant="caption">
+                <span>
+                    {`data source: `}
+                    <a  href={'https://www.worldometers.info/coronavirus/'}>
+                        {'https://www.worldometers.info'}
+                    </a>
+                </span>
+            </Typography>
         </Paper>
     );
 }
@@ -315,5 +404,49 @@ const DefaultRow = (props) => {
                 )}
             </React.Fragment>
         </TableRow>
+    );
+}
+
+const SearchBar = (props) => {
+    const classes = useStyles();
+
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        props.onSearchValueChanged(value);
+    }
+    return (
+        <React.Fragment>
+            {props.searchHidden === 'false'? (
+                <Grid container>
+                    <Grid item xs={6}>
+                        <div className={classes.tableName}>
+                            <Typography variant="h6">
+                                Covid-19 Statistics
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box border={1}>
+                            <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <SearchIcon />
+                                </div>
+                                <InputBase
+                                    placeholder="Search…"
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' }}
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                        </Box>
+                    </Grid>
+                </Grid>
+            ) : (
+                ''
+            )}
+        </React.Fragment>
     );
 }

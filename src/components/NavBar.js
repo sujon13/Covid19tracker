@@ -32,11 +32,8 @@ export default function NavBar() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}> 
-                        AppName
+                        Corona Tracker
                     </Typography>
-                    <Button color="inherit">
-                        Demo Icon
-                    </Button>
                 </Toolbar>
             </AppBar>
 

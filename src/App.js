@@ -94,26 +94,33 @@
 
     return (
         <div className={classes.root}>
-            {isError && <div>Something went wrong ...</div>}
-            { isLoading ? (
-                <div>Loading ...</div>
-            ) : (
-                <Grid container spacing={3}>
-                    <Grid container item sm={12} md={3}spacing={3} direction="row">
-                        <FormRow/>
-                    </Grid>
-                    <Grid item sm={12} md={9}>
-                        <HeadPaper data={data}/>
-                    </Grid>
-                    <Grid container item xs={12} direction="row">
-                        <Grid item xs={6} >
-                            <SelectorButton onButtonClick={handleButtonClick} buttonName={buttonName}/>
+            {isError ? (
+                <Grid container><Grid item xs={12} style={{textAlign: "center"}}>Something went wrong...</Grid></Grid>
+            ) :(
+                <React.Fragment>
+                    { isLoading ? (
+                        <div>Loading ...</div>
+                    ) : (
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <HeadPaper data={data}/>
+                            </Grid>
+                            <Grid container item xs={12} direction="row">
+                                <Grid item xs={6} >
+                                    <SelectorButton onButtonClick={handleButtonClick} buttonName={buttonName}/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <MainTable 
+                                        dataList={data}
+                                        paginationActive="true"
+                                        sortLabel="show"
+                                        searchHidden="false"
+                                    />
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <MainTable dataList={data} paginationActive="true"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                    )}
+                </React.Fragment>
             )}
         </div>
     );
@@ -148,7 +155,7 @@
     return (
         <Grid container spacing={1} className={classes.button}>
             <Grid item>
-                <Tooltip title="click to see todays data">
+                <Tooltip title="see todays data">
                     <Button
                         variant="contained"
                         color={colors.today}
@@ -160,7 +167,7 @@
                 </Tooltip>
             </Grid>
             <Grid item>
-                <Tooltip title="click to see yesterdays data">
+                <Tooltip title="see yesterdays data">
                     <Button 
                         variant="contained"
                         color={colors.yesterday}
