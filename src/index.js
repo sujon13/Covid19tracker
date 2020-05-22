@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import CountryDetail from './components/CountryDetail';
 import { StateProvider } from './store.js';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
                         <Route path="/" component={App} exact/>
                         <Route path="/country/:cName/" component={CountryDetail}/>
                     </Switch>
+                    <Footer/>
                 </Router>
             </React.Fragment>
         </StateProvider>,

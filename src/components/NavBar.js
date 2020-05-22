@@ -5,9 +5,14 @@ import {
     Toolbar,
     Typography,
     Button,
-    IconButton
+    IconButton,
+    Avatar,
+    Tooltip,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import  MenuIcon from '@material-ui/icons/Menu';
+import DeleteIcon from '@material-ui/icons/Delete';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,12 +33,23 @@ export default function NavBar() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon/>
-                    </IconButton>
                     <Typography variant="h6" className={classes.title}> 
                         Corona Tracker
                     </Typography>
+                    <Tooltip title="Github Repository">
+                        <a target="_blank" href={`https://github.com/sujon13/Corona-App-ReactJs`}>
+                            <IconButton>
+                                <GitHubIcon style={{color:'white'}}/>
+                            </IconButton>
+                        </a>
+                    </Tooltip>
+                    <Tooltip title="Developer linkedin profile">
+                        <a target="_blank" href={`https://www.linkedin.com/in/arifur-rahman-sujon/`}>
+                            <IconButton>
+                                <LinkedInIcon style={{color:'white'}}/>
+                            </IconButton>
+                        </a>
+                    </Tooltip>
                 </Toolbar>
             </AppBar>
 
