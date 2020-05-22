@@ -1,23 +1,24 @@
-Prerequisites
-Install Node JS
-Refer to https://nodejs.org/en/ to install nodejs
+## Prerequisites ##
+First you need to have nodejs and npm installed on your pc.
+You can see it [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-Install create-react-app
-Install create-react-app npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install create-react-app
+#### Cloning and Running the Application in local ####
+- Clone the repo in your terminal by clicking the green clone or download button at the top right and copying the url
+- Type ```git clone [repository url]```
+- Type ```cd [local repository]``` to go to local repository.
+- Check package.json file and ensure scripts are notated as below:
+```
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  ```
+- Delete the node_modules folder and any 'lock' files such as yarn.lock or package-lock.json if present.
+- Type ```npm install``` for installing all dependency
+- Type ```npm start``` to run the projects
+- If you face roboto-font error Type ```npm install typeface-roboto --save```to install it
+- Again Type```npm start```
 
-npm install -g create-react-app
-Live Application URL
-The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
-
-Click on the link to see the application
-
-Cloning and Running the Application in local
-Clone the project into local
-
-Install all the npm packages. Go into the project folder and type the following command to install all npm packages
-
-npm install
-In order to run the application Type the following command
-
-npm start
-The Application Runs on localhost:3000
+The Application Runs on __localhost:3000__
