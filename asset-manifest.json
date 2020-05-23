@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Corona-App-ReactJs/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/Corona-App-ReactJs/static/js/main.ed2d4110.chunk.js",
+    "main.js.map": "/Corona-App-ReactJs/static/js/main.ed2d4110.chunk.js.map",
+    "runtime-main.js": "/Corona-App-ReactJs/static/js/runtime-main.439724e3.js",
+    "runtime-main.js.map": "/Corona-App-ReactJs/static/js/runtime-main.439724e3.js.map",
+    "static/css/2.b66ed835.chunk.css": "/Corona-App-ReactJs/static/css/2.b66ed835.chunk.css",
+    "static/js/2.845b97cd.chunk.js": "/Corona-App-ReactJs/static/js/2.845b97cd.chunk.js",
+    "static/js/2.845b97cd.chunk.js.map": "/Corona-App-ReactJs/static/js/2.845b97cd.chunk.js.map",
+    "index.html": "/Corona-App-ReactJs/index.html",
+    "precache-manifest.e54fa8533a1f079cb463c4d475df0e70.js": "/Corona-App-ReactJs/precache-manifest.e54fa8533a1f079cb463c4d475df0e70.js",
+    "service-worker.js": "/Corona-App-ReactJs/service-worker.js",
+    "static/css/2.b66ed835.chunk.css.map": "/Corona-App-ReactJs/static/css/2.b66ed835.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/Corona-App-ReactJs/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.845b97cd.chunk.js.LICENSE.txt": "/Corona-App-ReactJs/static/js/2.845b97cd.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/Corona-App-ReactJs/static/media/roboto-latin-900italic.ebf6d164.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.439724e3.js",
+    "static/css/2.b66ed835.chunk.css",
+    "static/js/2.845b97cd.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.ed2d4110.chunk.js"
+  ]
+}
