@@ -78,14 +78,34 @@ function Table(props) {
    
     function formatInfo(object, str) {
         return `${capitalize(str)}: ${object[str].toLocaleString('en-US')}`;
+       
     }
-    function printCase(object, str) {
+    function printCase(object, str, newStr=null) {
         return (
             <Grid item xs={12}>
                 <ThemeProvider theme={theme}>
-                    <Typography>
-                        {formatInfo(object, str)}
-                    </Typography>
+                    <span>
+                        <Typography>
+                            {formatInfo(object, str)}
+                        </Typography>
+                        <React.Fragment>
+                            {newStr === null? (
+                                ''
+                            ) : (
+                                <React.Fragment>
+                                    {newStr === 'new cases'? (
+                                        <Typography style={{color: 'red'}}>
+                                            {`( +${object[newStr].toLocaleString('en-US')} )`}
+                                        </Typography>
+                                    ) : (
+                                        <Typography style={{color: '#a88532'}}> 
+                                            {`( +${object[newStr].toLocaleString('en-US')} )`}
+                                        </Typography>
+                                    )}
+                                </React.Fragment>
+                            )}
+                        </React.Fragment>
+                    </span>
                 </ThemeProvider>
             </Grid>
         )
@@ -115,8 +135,8 @@ function Table(props) {
                                             </Link>
                                         </Tooltip>
                                     </Grid>
-                                    {printCase(data, "total cases")}
-                                    {printCase(data, "total deaths")}
+                                    {printCase(data, "total cases", "new cases")}
+                                    {printCase(data, "total deaths", "new deaths")}
                                     {printCase(data, "total recovered")}
                                 </Grid>
                             </Paper>

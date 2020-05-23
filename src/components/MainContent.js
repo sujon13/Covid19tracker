@@ -158,7 +158,7 @@ export default function MainTable(props) {
     const [filteredDataList, setFilteredDataList] = useState(props.dataList);
     const [paginationActive, setPaginationActive] = useState(props.paginationActive);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
+    const [rowsPerPage, setRowsPerPage] = React.useState(15);
     const [order, setOrder] = React.useState('desc');
     const [orderBy, setOrderBy] = React.useState('new cases');
 
