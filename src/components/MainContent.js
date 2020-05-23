@@ -146,10 +146,6 @@ const useStyles = makeStyles((theme) => ({
     container: {
         maxHeight: 800,
     },
-    tableName: {
-        textAlign: 'center',
-        justify: "center",
-    },
 }))
 
 export default function MainTable(props) {
@@ -378,9 +374,9 @@ const SearchBar = (props) => {
     return (
         <React.Fragment>
             {props.searchHidden === 'false'? (
-                <Grid container>
+                <Grid container justify='center' alignItems='center' direction='row'>
                     <Grid item xs={6}>
-                        <div className={classes.tableName}>
+                        <div style={{textAlign: 'center'}}>
                             <Typography variant="h6">
                                 Covid-19 Statistics
                             </Typography>
