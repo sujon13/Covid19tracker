@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8897283fedcfbdb5eb5f69b022534266",
+    "revision": "793fd585337b417e4275557f59d10ed7",
     "url": "/Corona-App-ReactJs/index.html"
   },
   {
-    "revision": "8f7b3e1b286eeb6e7eb4",
+    "revision": "83be5b2ecb355f147627",
     "url": "/Corona-App-ReactJs/static/css/2.b66ed835.chunk.css"
   },
   {
-    "revision": "bea6729b17fd2ac8d1e1",
+    "revision": "0bc4572e38df5433d6f1",
     "url": "/Corona-App-ReactJs/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "8f7b3e1b286eeb6e7eb4",
-    "url": "/Corona-App-ReactJs/static/js/2.845b97cd.chunk.js"
+    "revision": "83be5b2ecb355f147627",
+    "url": "/Corona-App-ReactJs/static/js/2.b85243c2.chunk.js"
   },
   {
     "revision": "087443c74bc6a86aeac1ad9ae43d6208",
-    "url": "/Corona-App-ReactJs/static/js/2.845b97cd.chunk.js.LICENSE.txt"
+    "url": "/Corona-App-ReactJs/static/js/2.b85243c2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bea6729b17fd2ac8d1e1",
-    "url": "/Corona-App-ReactJs/static/js/main.ed2d4110.chunk.js"
+    "revision": "0bc4572e38df5433d6f1",
+    "url": "/Corona-App-ReactJs/static/js/main.c437a67c.chunk.js"
   },
   {
     "revision": "2a0fcb587378480b4e91",
