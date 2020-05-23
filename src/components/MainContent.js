@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Link

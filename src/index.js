@@ -10,7 +10,7 @@ import CountryDetail from './components/CountryDetail';
 import { StateProvider } from './store.js';
 
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Link
