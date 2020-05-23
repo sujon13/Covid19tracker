@@ -1,3 +1,14 @@
+# Covid19 Tracker #
+
+A small app to know covid-19 related information. Here you can see country wise corona virus latest information
+
+You also can search info and sort table column to know relative condition of countries.
+Some more features are coming.
+
+## Live URL ##
+I deployed it in my github pages.
+You can visit [https://sujon13.github.io/Covid19tracker](https://sujon13.github.io/Covid19tracker)
+
 ## Prerequisites ##
 First you need to have nodejs and npm installed on your pc.
 You can see it [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
@@ -13,6 +24,7 @@ You can see it [here](https://docs.npmjs.com/downloading-and-installing-node-js-
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    //can be more lines
   },
   ```
 - Delete the node_modules folder and any 'lock' files such as yarn.lock or package-lock.json if present.
