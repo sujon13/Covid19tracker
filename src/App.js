@@ -50,8 +50,7 @@
         setIsError(false);
         setIsLoading(true);
         try {
-            let url = `https://d5373c8e.ngrok.io/api/v1/corona_stats/${day}/`;
-            let URL = `http://127.0.0.1:8000/api/v1/corona_stats/${day}/`;
+            let url = `https://covid-19-info-bd.herokuapp.com/api/v1/corona_stats/${day}/`;
             const result = await axios(url);
             
             setData(result.data);
