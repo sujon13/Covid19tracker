@@ -19,6 +19,7 @@
  import axios from 'axios';
  import { store } from './store.js';
  import CircularDeterminate from './components/Spinner';
+ import ImportantInfo from './components/ImportantInfo';
 
  const useStyles = makeStyles((theme) => ({
      root: {
@@ -108,6 +109,9 @@
                 
                     ) : (
                         <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <ImportantInfo/>
+                            </Grid>
                             <Grid item xs={12}>
                                 <HeadPaper data={data}/>
                             </Grid>
