@@ -11,12 +11,14 @@
      Grid,
      Button,
      Typography,
-     Tooltip
+     Tooltip,
+     Container,
  } from '@material-ui/core';
  import HeadPaper from './components/HeadNews';
  import MainTable from './components/MainContent';
  import axios from 'axios';
  import { store } from './store.js';
+ import CircularDeterminate from './components/Spinner';
 
  const useStyles = makeStyles((theme) => ({
      root: {
@@ -98,7 +100,12 @@
             ) :(
                 <React.Fragment>
                     { isLoading ? (
-                        <div>Loading ...</div>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <CircularDeterminate/>
+                            </Grid>
+                        </Grid>
+                
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
