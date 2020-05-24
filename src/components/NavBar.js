@@ -37,7 +37,7 @@ export default function NavBar() {
                         Corona Tracker
                     </Typography>
                     <Tooltip title="Github Repository">
-                        <a target="_blank" href={`https://github.com/sujon13/Corona-App-ReactJs`}>
+                        <a target="_blank" href={`https://github.com/sujon13/Covid19tracker`}>
                             <IconButton>
                                 <GitHubIcon style={{color:'white'}}/>
                             </IconButton>

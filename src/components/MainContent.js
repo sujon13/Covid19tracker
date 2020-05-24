@@ -31,6 +31,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import { lightBlue } from "@material-ui/core/colors";
 
 const columns = [
+    {
+        id: "serial",
+        label: '#',
+        align: 'center'
+    },
     { 
         id: "country",
         label: "Country",
@@ -253,12 +258,12 @@ export default function MainTable(props) {
                 
                         stableSort(filterDataList(), getComparator(order, orderBy))
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map(data => {
+                        .map((data, ind) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={data.country}>
                                     {columns.map((column) => {
-                                        const value = data[column.id];
-                                        
+                                        let value = data[column.id];
+                                        if(column.id === 'serial')value = ind + 1;
                                         return (
                                             <React.Fragment>
                                                 {value > 0? (
