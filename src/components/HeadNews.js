@@ -94,11 +94,11 @@ function Table(props) {
                             ) : (
                                 <React.Fragment>
                                     {newStr === 'new cases'? (
-                                        <Typography style={{color: 'red'}}>
+                                        <Typography style={{color: '#a88532'}}>
                                             {`( +${object[newStr].toLocaleString('en-US')} )`}
                                         </Typography>
                                     ) : (
-                                        <Typography style={{color: '#a88532'}}> 
+                                        <Typography style={{color: 'red'}}> 
                                             {`( +${object[newStr].toLocaleString('en-US')} )`}
                                         </Typography>
                                     )}
